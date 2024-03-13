@@ -8,17 +8,17 @@ import { pool } from '../database/connect.js';
       return Promise.reject('El telefono ya está en uso');
     }
 };*/
-const fieldName="fieldName";
-const isUniqueParam = (fieldName) => {
+const isUniqueParam = (fieldName, columnName) => {
   return async (value) => {
-    const query = 'SELECT * FROM persons WHERE ${fieldName} = $1';
+    const query = `SELECT * FROM persons WHERE ${columnName} = $1`;
     const result = await pool.query(query, [value]);
 
     if (result.rowCount > 0) {
-      return Promise.reject('${fieldName} debe ser único');
+      return Promise.reject(`${fieldName} debe ser único`);
     }
   };
 };
+
 export const createValidators = [
   body('username')
     .isLength({ min: 3 })
@@ -33,7 +33,8 @@ export const createValidators = [
     .not().isEmpty()
     .withMessage('El Apellido es obligatorio'),
   body('phone')
-    .not().isEmpty()
+    .not()
+    .isEmpty()
     .withMessage('El Apellido es obligatorio')
-    .custom(isUniqueParam),
+    .custom(isUniqueParam('teléfono', 'phone')),
 ];

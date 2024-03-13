@@ -12,11 +12,11 @@ const {Pool}=pkg;
   email VARCHAR(100) UNIQUE NOT NULL
 );*/
 export const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'suite_g_d',
-  password: 'postgres',
-  port: 5432,
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASS,
+  port: process.env.PGPORT,
   allowExitOnIdle: true,
 });
 
