@@ -38,5 +38,4 @@ export const createValidators = [
     .not().isEmpty()
     .withMessage('El correo es obligatorio')
     .custom(isUniqueParam('correo', 'email')),
-    
 ];
