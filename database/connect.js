@@ -1,6 +1,7 @@
 import "dotenv/config";
 import pkg from 'pg';
 const {Pool}=pkg;
+
 /*CREATE TABLE nombre_tabla (
   id_user SERIAL PRIMARY KEY,
   username VARCHAR(50) NOT NULL,

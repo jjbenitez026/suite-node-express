@@ -6,7 +6,10 @@ import { validate } from '../middleware/validate.middleware.js';
 const router = Router();
 
 router.get("/", userController.getAll);
-router.post("/", [...createValidators, validate], userController.createPersons);
+router.get("/search/:id", userController.getByID);
+router.post("/create", [...createValidators, validate], userController.createPersons);
+router.put("/update/:id", [...createValidators, validate], userController.updateUser);
+router.delete("/delete/:id",userController.deletUser);
 
 export default router;
 
